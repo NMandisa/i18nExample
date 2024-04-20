@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org" th:lang="en">
+<head>
+<title>i18n-demo</title>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+	<h1>i18n-l10n-spring-demo</h1>
+
+	<span th:text="#{Hello}"></span><br>
+	<span th:text="#{World}"></span><br>
+
+	<button type="button" th:text="#{switch-en}" onclick="window.location.href='http://localhost:8080/?lang=de'"></button> <!-- 3 -->
+	<button type="button" th:text="#{switch-zu}" onclick="window.location.href='http://localhost:8080/?lang=zu'"></button>
+</body>
+</html>

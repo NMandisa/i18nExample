@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,14 +24,21 @@ public class HomeController {
     @SuppressWarnings("unsed")
     private final ResourceBundleMessageSource bundleMessageSource;
     @Autowired
-    public HomeController(@Qualifier("webMessageSource")ResourceBundleMessageSource bundleMessageSource){
+    public HomeController(@Qualifier("messageSource")ResourceBundleMessageSource  bundleMessageSource){
         this.bundleMessageSource=bundleMessageSource;
     }
     @GetMapping("/")
     public ModelAndView index(@RequestParam(name = "lang",required = false)String localParam){
         Locale locale = Locale.getDefault();
-        if(localParam != null && !localParam.isEmpty()){locale= Locale.of(localParam);}
+        if(localParam != null && !localParam.isEmpty()){locale= Locale.forLanguageTag(localParam);}
         log.info("Welcome home! The client locale is {}.", locale);
-        return new ModelAndView("index");
+        String welcomeMessage = bundleMessageSource.getMessage("welcome.message", null, locale);
+        String hello = bundleMessageSource.getMessage("hello", null, locale);
+        String world = bundleMessageSource.getMessage("world", null, locale);
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("welcome.message", welcomeMessage);
+        modelAndView.addObject("hello", hello);
+        modelAndView.addObject("world", world);
+        return modelAndView;
     }
 }

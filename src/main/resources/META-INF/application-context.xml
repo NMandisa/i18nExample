@@ -11,7 +11,7 @@
 
     <context:annotation-config/>
     <context:component-scan base-package="za.co.fynbos"/>
-    <context:property-placeholder location="classpath:./application.properties"/>
+    <context:property-placeholder location="classpath:app.properties"/>
 
     <!-- Message bundle -->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">

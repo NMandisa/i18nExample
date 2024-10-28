@@ -68,6 +68,12 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>jakarta.inject</groupId>
+			<artifactId>jakarta.inject-api</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+
 		<!-- API, java.xml.bind module -->
 		<dependency>
 			<groupId>jakarta.xml.bind</groupId>
@@ -161,6 +167,38 @@
 		</dependency>
 		<!--END Logging dependency-->
 
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>4.1.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<version>4.1.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>5.3.13</version>
+			<scope>test</scope>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
@@ -172,6 +210,14 @@
 				<directory>src/main/resources</directory>
 			</resource>
 		</resources>
+
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+			</testResource>
+		</testResources>
+		<testOutputDirectory>${project.build.directory}/target</testOutputDirectory>
 
 		<plugins>
 			<plugin>
@@ -187,10 +233,15 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.3.2</version>
-				<configuration>
-					<warSourceDirectory>${basedir}/src/main/webapp</warSourceDirectory>
-					<webXml>${basedir}/src/main/webapp/WEB-INF</webXml>
-				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<configuration>
+							<warSourceDirectory>${basedir}/src/main/webapp</warSourceDirectory>
+							<webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -199,7 +250,7 @@
 		<developer>
 			<id>NMMkhungo</id>
 			<name>Noxolo Mkhungo</name>
-			<email>noxolomandisamkhungo@gmail.com</email>
+			<email>Noxolo@Mkhungo.co.za</email>
 			<timezone>+2</timezone>
 		</developer>
 	</developers>
